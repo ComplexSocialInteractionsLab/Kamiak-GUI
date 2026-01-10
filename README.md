@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HPC Dashboard
 
-## Getting Started
+A modern, web-based dashboard for managing High Performance Computing (HPC) clusters (specifically designed for Kamiak). This application replaces traditional command-line interactions with a user-friendly graphical interface.
 
-First, run the development server:
+## Features
 
-```bash
+-   **Dashboard & Auth**: Secure SSH-based login and cluster status overview.
+-   **File Manager**:
+    -   Browse remote directories.
+    -   View and edit files (with syntax highlighting).
+    -   Create path-based navigation.
+    -   **File Deletion** (with safety prompts).
+-   **Job Management**:
+    -   **Job Composer**: UI-based Slurm script generator (Standard & GPU templates).
+    -   **Job Monitor**: status of active queues and historical jobs.
+    -   **Job Cancellation**: Cancel running jobs directly from the UI.
+-   **Web Terminal**: Built-in console for executing quick shell commands.
+
+## Prerequisites
+
+-   Node.js 18+
+-   Access to an HPC cluster (via SSH)
+
+## Installation
+
+1.  Clone the repository:
+    `ash
+    git clone <repository-url>
+    cd <repository-directory>
+    `
+
+2.  Install dependencies:
+    `ash
+    npm install
+    `
+
+## Development
+
+To run the development server:
+
+`ash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Standard Build
+To build the application for production:
 
-## Learn More
+`ash
+npm run build
+npm start
+`
 
-To learn more about Next.js, take a look at the following resources:
+### Standalone Build (Recommended for Deployment)
+This project is configured to produce a standalone build, which creates a self-contained folder that does not require 
+ode_modules.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  Build the project:
+    `ash
+    npm run build
+    `
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2.  The standalone build is located in .next/standalone.
 
-## Deploy on Vercel
+3.  **Deployment Steps**:
+    -   Copy the .next/standalone folder to your server.
+    -   **Important**: Copy .next/static to .next/standalone/.next/static.
+    -   **Important**: Copy public to .next/standalone/public.
+    -   Run the server: 
+ode server.js
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Windows Helper Script
+For Windows users, a helper script un_standalone.bat is included. It automatically handles the copying of assets and starting the server.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Technologies
+
+-   [Next.js 16](https://nextjs.org/) (App Router)
+-   [React](https://react.dev/)
+-   [Tailwind CSS](https://tailwindcss.com/)
+-   [SSH2](https://github.com/mscdex/ssh2) (Backend SSH handling)
