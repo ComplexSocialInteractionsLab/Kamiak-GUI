@@ -27,13 +27,13 @@ A modern, web-based dashboard for managing High Performance Computing (HPC) clus
 ## Installation
 
 1.  Clone the repository:
-    `ash
+    `
     git clone <repository-url>
     cd <repository-directory>
     `
 
 2.  Install dependencies:
-    `ash
+    `
     npm install
     `
 
@@ -41,7 +41,7 @@ A modern, web-based dashboard for managing High Performance Computing (HPC) clus
 
 To run the development server:
 
-`ash
+`
 npm run dev
 `
 
@@ -52,7 +52,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser.
 ### Standard Build
 To build the application for production:
 
-`ash
+`
 npm run build
 npm start
 `
@@ -62,7 +62,7 @@ This project is configured to produce a standalone build, which creates a self-c
 ode_modules.
 
 1.  Build the project:
-    `ash
+    `
     npm run build
     `
 
@@ -85,6 +85,7 @@ un_standalone.bat is included. It automatically handles the copying of assets an
 -   [React](https://react.dev/)
 -   [Tailwind CSS](https://tailwindcss.com/)
 -   [SSH2](https://github.com/mscdex/ssh2) (Backend SSH handling)
+
 
 
 
