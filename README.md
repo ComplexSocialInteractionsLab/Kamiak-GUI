@@ -1,6 +1,8 @@
 # HPC Dashboard
 
 A modern, web-based dashboard for managing High Performance Computing (HPC) clusters (specifically designed for Kamiak). This application replaces traditional command-line interactions with a user-friendly graphical interface.
+<img width="1360" height="994" alt="image" src="https://github.com/user-attachments/assets/da810c82-e3fe-4868-8704-f651042f5407" />
+
 
 ## Features
 
@@ -15,7 +17,8 @@ A modern, web-based dashboard for managing High Performance Computing (HPC) clus
     -   **Job Monitor**: status of active queues and historical jobs.
     -   **Job Cancellation**: Cancel running jobs directly from the UI.
 -   **Web Terminal**: Built-in console for executing quick shell commands.
-
+-   
+![KamiakGUI-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/739a4263-23c0-4241-982d-639711851d40)
 ## Prerequisites
 
 -   Node.js 18+
@@ -24,13 +27,13 @@ A modern, web-based dashboard for managing High Performance Computing (HPC) clus
 ## Installation
 
 1.  Clone the repository:
-    `ash
+    `
     git clone <repository-url>
     cd <repository-directory>
     `
 
 2.  Install dependencies:
-    `ash
+    `
     npm install
     `
 
@@ -38,7 +41,7 @@ A modern, web-based dashboard for managing High Performance Computing (HPC) clus
 
 To run the development server:
 
-`ash
+`
 npm run dev
 `
 
@@ -49,7 +52,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser.
 ### Standard Build
 To build the application for production:
 
-`ash
+`
 npm run build
 npm start
 `
@@ -59,7 +62,7 @@ This project is configured to produce a standalone build, which creates a self-c
 ode_modules.
 
 1.  Build the project:
-    `ash
+    `
     npm run build
     `
 
@@ -73,7 +76,8 @@ ode_modules.
 ode server.js
 
 ### Windows Helper Script
-For Windows users, a helper script un_standalone.bat is included. It automatically handles the copying of assets and starting the server.
+For Windows users, a helper script 
+un_standalone.bat is included. It automatically handles the copying of assets and starting the server.
 
 ## Technologies
 
@@ -81,3 +85,7 @@ For Windows users, a helper script un_standalone.bat is included. It automatica
 -   [React](https://react.dev/)
 -   [Tailwind CSS](https://tailwindcss.com/)
 -   [SSH2](https://github.com/mscdex/ssh2) (Backend SSH handling)
+
+
+
+
