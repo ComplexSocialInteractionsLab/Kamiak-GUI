@@ -18,49 +18,49 @@ export default function Login({ onLogin, loading }: LoginProps) {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-900 p-24 text-white">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 p-24 text-gray-900">
       <div className="z-10 w-full max-w-md items-center justify-between font-mono text-sm">
-        <h1 className="mb-8 text-center text-4xl font-bold bg-gradient-to-r from-blue-500 to-teal-400 bg-clip-text text-transparent">
+        <h1 className="mb-8 text-center text-4xl font-bold text-gray-900">
           Kamiak Console
         </h1>
-        <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-lg shadow-xl border border-gray-700">
+        <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-xl border border-gray-200">
           <div className="mb-4">
-            <label className="block text-gray-400 mb-2" htmlFor="host">Host</label>
+            <label className="block text-gray-700 mb-2" htmlFor="host">Host</label>
             <input
               id="host"
               type="text"
               value={host}
               onChange={(e) => setHost(e.target.value)}
-              className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-500"
+              className="w-full bg-white border border-gray-300 rounded px-3 py-2 text-gray-900 focus:outline-none focus:border-crimson"
               required
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-400 mb-2" htmlFor="username">Username</label>
+            <label className="block text-gray-700 mb-2" htmlFor="username">Username</label>
             <input
               id="username"
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-500"
+              className="w-full bg-white border border-gray-300 rounded px-3 py-2 text-gray-900 focus:outline-none focus:border-crimson"
               required
             />
           </div>
           <div className="mb-6">
-            <label className="block text-gray-400 mb-2" htmlFor="password">Password</label>
+            <label className="block text-gray-700 mb-2" htmlFor="password">Password</label>
             <input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-500"
+              className="w-full bg-white border border-gray-300 rounded px-3 py-2 text-gray-900 focus:outline-none focus:border-crimson"
               required
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-crimson hover:bg-[#7b1829] text-gray-900 font-bold py-2 px-4 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Connecting...' : 'Connect'}
           </button>
