@@ -23,7 +23,11 @@ A modern, web-based dashboard for managing High Performance Computing (HPC) clus
     -   **GPU Acceleration**: Allocates GPU resources (Kamiak) for high-performance inference.
     -   **Secure Tunneling**: Establishes a secure SSH tunnel to forward the remote LLM server to your local machine.
     -   **Chat Interface**: User-friendly chat UI to interact with models like Llama-3-8B.
--   
+    
+
+https://github.com/user-attachments/assets/3947ec31-ef76-41fb-abfa-4597f0379715
+
+
 ## Prerequisites
 
 -   Node.js 18+
@@ -90,6 +94,7 @@ un_standalone.bat is included. It automatically handles the copying of assets an
 -   [React](https://react.dev/)
 -   [Tailwind CSS](https://tailwindcss.com/)
 -   [SSH2](https://github.com/mscdex/ssh2) (Backend SSH handling)
+
 
 
 
