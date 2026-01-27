@@ -26,16 +26,19 @@ Replaces  command-line interactions with a dashboard.
 *   **Live Monitoring**: Real-time view of active queues (`squeue`) and historical jobs (`sacct`).
 *   **Control**: Cancel running jobs instantly with one click.
 
-### 🤖 LLM Studio (New!)
+### 🤖 LLM Studio (Gems New!)
 Turn your HPC allocation into a private AI playground.
 *   **One-Click Server**: Deploys a Flask-based LLM server on a GPU node automatically.
 *   **Custom Models**: Run Llama 3, Mistral, Gemma 7B, and more.
 *   **RAG / Context**: Upload documents (`.pdf`, `.docx`, `.txt`) to chat with your data.
 *   **Markdown Chat**: Rich text formatting for code blocks, tables, and lists.
 *   **Manage Models**: View and delete cached HuggingFace models to save disk space.
+*   **Gems**: Custom, specialized AI assistants designed to handle repetitive tasks or provide expert, tailored help on specific topics.
+<img width="1000" height="373" alt="image" src="https://github.com/user-attachments/assets/3dc6d688-d7c8-4e17-8f3f-e1f9f9de51d7" />
 
 ---
 https://github.com/user-attachments/assets/aefeb9b5-d653-4b43-8fcb-be5b7f99b37b
+
 
 ---
 
@@ -117,5 +120,6 @@ For production deployment without `node_modules` dependency :
 <div align="center">
   <sub>Built for the Kamiak Cluster</sub>
 </div>
+
 
 
