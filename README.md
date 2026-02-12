@@ -1,9 +1,7 @@
-# 🚀 HPC Dashboard
+#  Kamiak HPC Cluster
 
+<img width="2400" height="1582" alt="Gemini_Generated_Image_hvpjj2hvpjj2hvpj" src="https://github.com/user-attachments/assets/4b954612-1d25-4c09-a2ca-a276b055eca0" />
 <div align="center">
-
-<img width="1077" height="480" alt="image" src="https://github.com/user-attachments/assets/5f6c0d2e-28ab-42e2-a141-35df0b201e1e" />
-
 
 **A modern, web-based interface for the Kamiak HPC Cluster.**  
 Replaces  command-line interactions with a dashboard.
@@ -13,6 +11,7 @@ Replaces  command-line interactions with a dashboard.
 </div>
 
 ---
+<img width="1077" height="480" alt="image" src="https://github.com/user-attachments/assets/5f6c0d2e-28ab-42e2-a141-35df0b201e1e" />
 
 ## ✨ Key Features
 
@@ -120,6 +119,7 @@ For production deployment without `node_modules` dependency :
 <div align="center">
   <sub>Built for the Kamiak Cluster</sub>
 </div>
+
 
 
 
