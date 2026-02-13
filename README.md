@@ -11,8 +11,6 @@ Replaces  command-line interactions with a dashboard.
 </div>
 
 ---
-<img width="1077" height="480" alt="image" src="https://github.com/user-attachments/assets/5f6c0d2e-28ab-42e2-a141-35df0b201e1e" />
-
 ## ✨ Key Features
 
 ### 🖥️ Cluster Management
@@ -33,6 +31,8 @@ Turn your HPC allocation into a private AI playground.
 *   **Markdown Chat**: Rich text formatting for code blocks, tables, and lists.
 *   **Manage Models**: View and delete cached HuggingFace models to save disk space.
 *   **Gems**: Custom, specialized AI assistants designed to handle repetitive tasks or provide expert, tailored help on specific topics.
+<img width="1077" height="480" alt="image" src="https://github.com/user-attachments/assets/5f6c0d2e-28ab-42e2-a141-35df0b201e1e" />
+
 <img width="1000" height="373" alt="image" src="https://github.com/user-attachments/assets/3dc6d688-d7c8-4e17-8f3f-e1f9f9de51d7" />
 
 ---
@@ -119,6 +119,7 @@ For production deployment without `node_modules` dependency :
 <div align="center">
   <sub>Built for the Kamiak Cluster</sub>
 </div>
+
 
 
 
