@@ -35,6 +35,13 @@ if not exist ".git" (
 REM Standard Update Check
 echo Checking for updates...
 git fetch origin
+if %ERRORLEVEL% NEQ 0 (
+    echo Git fetch failed. Attempting to fix remote...
+    git remote remove origin
+    git remote add origin https://github.com/ComplexSocialInteractionsLab/Kamiak-GUI.git
+    git fetch origin
+)
+
 for /f "tokens=*" %%i in ('git rev-list HEAD...origin/master --count') do set BEHIND=%%i
 
 :PROMPT_UPDATE
@@ -57,7 +64,8 @@ if /I "%ACCEPT%" NEQ "Y" (
 
 echo.
 echo Updating application...
-git pull origin master
+REM Force reset to avoid conflicts with local changes/zip downloads
+git reset --hard origin/master
 
 echo.
 echo Installing dependencies...

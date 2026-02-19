@@ -1,4 +1,4 @@
-'use server';
+﻿'use server';
 
 import { SSHCredentials } from '../lib/ssh';
 
@@ -39,11 +39,11 @@ export async function searchWeb(query: string): Promise<{ success: boolean; resu
             const block = rawParts[i];
 
             // Extract Title & Link
-            const linkMatch = /<a[^>]*class="[^"]*result__a[^"]*"[^>]*href="([^"]+)"[^>]*>(.*?)<\/a>/s.exec(block);
+            const linkMatch = /<a[^>]*class="[^"]*result__a[^"]*"[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/.exec(block);
 
             // Extract Snippet
             // Look for any element matching the class. Capture until the closing </a> tag to include nested tags (like <b>).
-            const snippetMatch = /class="[^"]*result__snippet[^"]*"[^>]*>([\s\S]*?)<\/a>/s.exec(block);
+            const snippetMatch = /class="[^"]*result__snippet[^"]*"[^>]*>([\s\S]*?)<\/a>/.exec(block);
 
             if (linkMatch) {
                 let link = linkMatch[1];
@@ -80,3 +80,4 @@ export async function searchWeb(query: string): Promise<{ success: boolean; resu
         return { success: false, error: (error as Error).message, results: [] };
     }
 }
+

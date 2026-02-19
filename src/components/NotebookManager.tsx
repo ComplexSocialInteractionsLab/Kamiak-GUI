@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect, useRef } from 'react';
 import ChatInterface from './ChatInterface';
@@ -171,7 +171,7 @@ export default function NotebookManager({ credentials, onRefresh }: NotebookMana
                     className="absolute top-4 left-4 z-20 bg-white p-2 rounded-lg shadow-md border border-gray-200 hover:bg-gray-50 text-gray-600"
                     title="Show Knowledge Sources"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><layoutSidebar /><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><line x1="9" x2="9" y1="3" y2="21"></line></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><line x1="9" x2="9" y1="3" y2="21"></line></svg>
                 </button>
             )}
 
@@ -256,3 +256,4 @@ export default function NotebookManager({ credentials, onRefresh }: NotebookMana
         </div >
     );
 }
+
