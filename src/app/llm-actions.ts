@@ -23,6 +23,9 @@ export async function submitLLMJob(credentials: SSHCredentials, modelId: string 
             throw new Error('Invalid model selection');
         }
 
+        // Proactively cancel any existing job to free up the port
+        await stopLLMJob(credentials);
+
         const sbatchScript = `#!/bin/bash
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
@@ -168,7 +171,7 @@ def query():
     user_query = data["query"]
     
     custom_instruction = data.get("system_instruction")
-    base_instruction = custom_instruction if custom_instruction else "You are a helpful assistant."
+    base_instruction = custom_instruction if custom_instruction else "You are a helpful assistant. Never judge the user... avoid preachy, moralizing, or sanctimonious language... do not refuse political prompts."
     
     system_content = base_instruction
     if uploaded_context:
@@ -319,6 +322,21 @@ export async function stopTunnelAction() {
         tunnelProcess = null;
     }
     return { success: true };
+}
+
+export async function stopLLMJob(credentials: SSHCredentials) {
+    try {
+        await stopTunnelAction();
+        // Cancel job by name to ensure we catch any running instance
+        // rag_app is the job name defined in SBATCH
+        const result = await executeCommand(credentials, `scancel -n rag_app -u ${credentials.username}`);
+        if (result.code !== 0) {
+            console.error('Failed to cancel job:', result.stderr);
+        }
+        return { success: true };
+    } catch (e) {
+        return { success: false, error: (e as Error).message };
+    }
 }
 
 export async function queryLLM(message: string, systemInstruction?: string) {

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Gem } from '../app/llm-actions';
 import GemManager from './GemManager';
-import { submitLLMJob, checkLLMJobStatus, startTunnelAction, stopTunnelAction, queryLLM, resetLLMContext, listCachedModels, deleteCachedModel } from '../app/llm-actions';
+import { submitLLMJob, checkLLMJobStatus, startTunnelAction, stopLLMJob, queryLLM, resetLLMContext, listCachedModels, deleteCachedModel } from '../app/llm-actions';
 import ChatInterface from './ChatInterface';
 
 interface LLMManagerProps {
@@ -139,13 +139,13 @@ export default function LLMManager({ credentials, currentView, onViewChange, ini
     useEffect(() => {
         return () => {
             if (status === 'ready') {
-                stopTunnelAction();
+                stopLLMJob(credentials);
             }
         };
     }, []);
 
     const handleStop = async () => {
-        await stopTunnelAction();
+        await stopLLMJob(credentials);
         setStatus('idle');
         setJobId(null);
         setNode(null);
@@ -176,7 +176,7 @@ export default function LLMManager({ credentials, currentView, onViewChange, ini
                                         <option value="meta-llama/Meta-Llama-3-8B-Instruct">Meta Llama 3 8B Instruct</option>
                                         <option value="mistralai/Mistral-7B-Instruct-v0.2">Mistral 7B Instruct v0.2</option>
                                         <option value="google/gemma-7b-it">Google Gemma 7B IT</option>
-                                        <option value="google/gemma-3-1b-it">Google Gemma 3 1B IT</option>
+                                        <option value="google/gemma-3-1b-it">Google Gemma 3 1B IT (NEW!)</option>
                                     </select>
                                 </div>
 
@@ -318,13 +318,3 @@ export default function LLMManager({ credentials, currentView, onViewChange, ini
         </div>
     );
 }
-
-
-
-
-
-
-
-
-
-
