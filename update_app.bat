@@ -25,6 +25,8 @@ if not exist ".git" (
     git init
     git remote add origin https://github.com/ComplexSocialInteractionsLab/Kamiak-GUI.git
     git fetch origin
+    echo Resetting local files to match remote repository...
+    git reset --hard origin/master
     echo Repository initialized. You may need to force update to sync with master.
     set BEHIND=1
     goto :PROMPT_UPDATE
