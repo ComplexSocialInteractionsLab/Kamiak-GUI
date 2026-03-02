@@ -64,8 +64,6 @@ Navigate to the **Manage LLMs** sub-tab to view models stored in `$HOME/.cache/h
 *   **Must have Kamiak Access**: To request access visit https://hpc.wsu.edu/kamiak-hpc/requesting-access/
 *   **Hugging Face Access Token**: https://huggingface.co/docs/hub/en/security-tokens
 *   **Node.js 18+**
-*   Access to an HPC cluster (via SSH)
-
 ---
 ## 📦 Deployment (Standalone)
 ### Windows Helper Script
@@ -118,6 +116,7 @@ For production deployment without `node_modules` dependency :
 <div align="center">
   <sub>Built for the Kamiak Cluster</sub>
 </div>
+
 
 
 
