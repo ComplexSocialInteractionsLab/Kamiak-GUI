@@ -41,33 +41,6 @@ https://github.com/user-attachments/assets/aefeb9b5-d653-4b43-8fcb-be5b7f99b37b
 
 ---
 
-## 🛠️ Installation
-
-### Prerequisites
-*   **Node.js 18+**
-*   Access to an HPC cluster (via SSH)
-
-### Quick Start
-
-1.  **Clone the Repo**
-    ```bash
-    git clone <repository-url>
-    cd <repository-directory>
-    ```
-
-2.  **Install Dependencies**
-    ```bash
-    npm install
-    ```
-
-3.  **Run Development Server**
-    ```bash
-    npm run dev
-    ```
-    Open [http://localhost:3000](http://localhost:3000) to launch.
-
----
-
 ## 🧠 LLM Integration Guide
 
 The **LLM Tab** provides a complete interface for running local LLMs on the cluster.
@@ -85,7 +58,15 @@ Select your desired model (e.g., `meta-llama/Meta-Llama-3-8B`) and click **Start
 Navigate to the **Manage LLMs** sub-tab to view models stored in `$HOME/.cache/huggingface/hub`. You can delete old models here to free up your user quota.
 
 ---
+## 🛠️ Installation
 
+### Prerequisites
+*   **Must have Kamiak Access**: To request access visit https://hpc.wsu.edu/kamiak-hpc/requesting-access/
+*   **Hugging Face Access Token**: https://huggingface.co/docs/hub/en/security-tokens
+*   **Node.js 18+**
+*   Access to an HPC cluster (via SSH)
+
+---
 ## 📦 Deployment (Standalone)
 ### Windows Helper Script
 For Windows users, a helper script `run_standalone.bat` is included. It automatically handles the copying of assets and starting the server.
@@ -105,7 +86,25 @@ For production deployment without `node_modules` dependency :
     ```bash
     node server.js
     ```
+---  
+### Quick Start
 
+1.  **Clone the Repo**
+    ```bash
+    git clone <repository-url>
+    cd <repository-directory>
+    ```
+
+2.  **Install Dependencies**
+    ```bash
+    npm install
+    ```
+
+3.  **Run Development Server**
+    ```bash
+    npm run dev
+    ```
+    Open [http://localhost:3000](http://localhost:3000) to launch.
 ---
 
 ## 💻 Technology Stack
@@ -119,6 +118,7 @@ For production deployment without `node_modules` dependency :
 <div align="center">
   <sub>Built for the Kamiak Cluster</sub>
 </div>
+
 
 
 
