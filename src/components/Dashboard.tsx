@@ -8,6 +8,9 @@ import Terminal from './Terminal';
 import LLMManager from './LLMManager';
 import NotebookManager from './NotebookManager';
 import { listGems, listCachedModels, Gem } from '../app/llm-actions';
+import { getStorageQuota, checkHuggingFaceAuth } from '../app/actions';
+import Settings from './Settings';
+
 
 interface DashboardProps {
     credentials: {
@@ -25,6 +28,8 @@ export default function Dashboard({ credentials, onLogout }: DashboardProps) {
     // Background Data State
     const [gems, setGems] = useState<Gem[]>([]);
     const [cachedModels, setCachedModels] = useState<{ id: string, name: string, size: string, path: string }[]>([]);
+    const [storageQuota, setStorageQuota] = useState<{ used: string; size: string; percent: string } | null>(null);
+    const [hfUsername, setHfUsername] = useState<string | null>(null);
     const [loadingBackground, setLoadingBackground] = useState(false);
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
@@ -36,9 +41,11 @@ export default function Dashboard({ credentials, onLogout }: DashboardProps) {
     const refreshData = async () => {
         setLoadingBackground(true);
         try {
-            const [gemsRes, modelsRes] = await Promise.all([
+            const [gemsRes, modelsRes, quotaRes, hfRes] = await Promise.all([
                 listGems(credentials),
-                listCachedModels(credentials)
+                listCachedModels(credentials),
+                getStorageQuota(credentials),
+                checkHuggingFaceAuth(credentials)
             ]);
 
             if (gemsRes.success && gemsRes.gems) {
@@ -47,11 +54,20 @@ export default function Dashboard({ credentials, onLogout }: DashboardProps) {
             if (modelsRes.success && modelsRes.models) {
                 setCachedModels(modelsRes.models);
             }
+            if (quotaRes.success && quotaRes.quota) {
+                setStorageQuota(quotaRes.quota);
+            }
+            if (hfRes.success && hfRes.username) {
+                setHfUsername(hfRes.username);
+            } else {
+                setHfUsername(null)
+            }
         } catch (e) {
             console.error("Background fetch failed", e);
         }
         setLoadingBackground(false);
     };
+
 
     const renderContent = () => {
         switch (activeTab) {
@@ -65,6 +81,9 @@ export default function Dashboard({ credentials, onLogout }: DashboardProps) {
                 return <Terminal credentials={credentials} />;
             case 'notebook':
                 return <NotebookManager credentials={credentials} />;
+            case 'settings':
+                return <Settings credentials={credentials} initialHfUsername={hfUsername} onRefreshAuth={refreshData} />;
+
             case 'llm':
                 return (
                     <LLMManager
@@ -87,8 +106,12 @@ export default function Dashboard({ credentials, onLogout }: DashboardProps) {
                             </div>
                             <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-lg">
                                 <h4 className="text-gray-600 text-sm font-medium mb-2">Storage Quota</h4>
-                                <div className="text-2xl font-bold text-crimson">--</div>
-                                <p className="text-xs text-gray-500 mt-1">Check via console</p>
+                                <div className="text-2xl font-bold text-crimson">
+                                    {storageQuota ? `${storageQuota.used} / ${storageQuota.size}` : '--'}
+                                </div>
+                                <p className="text-xs text-gray-500 mt-1">
+                                    {storageQuota ? `${storageQuota.percent} left` : 'Check via console'}
+                                </p>
                             </div>
                         </div>
                         <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-lg">
@@ -187,6 +210,23 @@ export default function Dashboard({ credentials, onLogout }: DashboardProps) {
                     >
                         {isSidebarCollapsed ? <span className="text-xl">N</span> : <span>Notebook</span>}
                     </button>
+
+                    {/* Settings Section */}
+                    <button
+                        onClick={() => setActiveTab('settings')}
+                        className={`w-full text-left px-3 py-3 rounded-lg transition-colors flex items-center ${activeTab === 'settings' ? 'bg-crimson text-gray-900 shadow-lg' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'} ${isSidebarCollapsed ? 'justify-center' : 'justify-start'}`}
+                        title={isSidebarCollapsed ? 'Settings' : ''}
+                    >
+                        {isSidebarCollapsed ? (
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        ) : (
+                            <span className="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                                <span>Settings</span>
+                            </span>
+                        )}
+                    </button>
+
                 </nav>
 
                 <div className="p-4 border-t border-gray-200 space-y-2">
@@ -201,6 +241,7 @@ export default function Dashboard({ credentials, onLogout }: DashboardProps) {
                     </button>
                 </div>
             </div>
+
 
             {/* Main Content */}
             <div className="flex-1 p-8 overflow-auto bg-gray-100">
