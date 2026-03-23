@@ -34,8 +34,8 @@ export async function submitNotebookJob(credentials: SSHCredentials, modelId: st
 #SBATCH --gres=gpu:1
 #SBATCH --time=04:00:00
 #SBATCH --job-name=notebook_llm
-#SBATCH --output=notebook_%j.out
-#SBATCH --error=notebook_%j.err
+#SBATCH --output=notebook.out
+#SBATCH --error=notebook.err
 #SBATCH --partition=kamiak
 
 module load python3/3.13.1
