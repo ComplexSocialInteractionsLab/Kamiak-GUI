@@ -34,8 +34,8 @@ export async function submitLLMJob(credentials: SSHCredentials, modelId: string 
 #SBATCH --gres=gpu:1
 #SBATCH --time=04:00:00
 #SBATCH --job-name=rag_app
-#SBATCH --output=rag_app_%j.out
-#SBATCH --error=rag_app_%j.err
+#SBATCH --output=rag_app.out
+#SBATCH --error=rag_app.err
 #SBATCH --partition=kamiak
 
 module load python3/3.13.1
